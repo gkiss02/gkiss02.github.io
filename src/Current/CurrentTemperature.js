@@ -1,4 +1,5 @@
 import styles from './CurrentTemperature.module.css'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun } from '@fortawesome/free-regular-svg-icons'
 
