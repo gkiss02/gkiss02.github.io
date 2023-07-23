@@ -1,10 +1,13 @@
+import styles from './App.module.css';
 
-import './App.css';
+import Header from './Header/Header'
+import CurrentTemperature from './Current/CurrentTemperature';
 
 function App() {
   return (
-    <div className="App">
-      <p>Hello</p>
+    <div className={styles.container}>
+      <Header></Header>
+      <CurrentTemperature></CurrentTemperature>
     </div>
   );
 }

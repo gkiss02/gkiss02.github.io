@@ -1,0 +1,12 @@
+.location, .date {
+    margin: 0;
+}
+
+.location {
+    font-weight: 500;
+    font-size: 1.75rem;
+}
+
+.date {
+    font-size: 1rem;
+}
