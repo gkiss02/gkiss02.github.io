@@ -1,6 +1,18 @@
 .container {
-  width: 80%;
+  width: 50%;
   margin: 1.2rem auto 0;
 }
 
+.current-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-top: .5rem;
+}
+
+.line {
+  height: 10rem;
+  width: .1rem;
+  background-color: white;
+}
 

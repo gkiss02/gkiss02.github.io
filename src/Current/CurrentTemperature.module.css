@@ -1,7 +1,21 @@
 .container {
     display: flex;
+    align-items: center;
 }
 
-.img {
-    width: 10%;
+.icon {
+    font-size: 7rem;
 }
+
+.text-container {
+    margin-left: 1.5rem;
+}
+
+.temperature {
+    font-size: 5rem;
+}
+
+.description {
+    font-size: 1rem;
+}
+
