@@ -2,15 +2,21 @@ import styles from './CurrentDatas.module.css'
 
 import CurrentDataItem from './CurrentDataItem';
 
-function CurrentDatas () {
+function convertMillisecondsToTime(utc) {
+    const date = new Date(utc)
+    console.log(date);
+  }
+  
+
+function CurrentDatas (props) {
     return (
         <div className={styles.container}>
-            <CurrentDataItem data='23°' description='Max temp'></CurrentDataItem>
-            <CurrentDataItem data='7mph' description='Wind'></CurrentDataItem>
-            <CurrentDataItem data='05:27' description='Sunrise'></CurrentDataItem>
-            <CurrentDataItem data='14°' description='Min temp'></CurrentDataItem>
-            <CurrentDataItem data='0%' description='Rain'></CurrentDataItem>
-            <CurrentDataItem data='20:57' description='Sunset'></CurrentDataItem>
+            <CurrentDataItem data={Math.round(props.weather.main.temp_max) + '°'} description='Max temp'></CurrentDataItem>
+            <CurrentDataItem data={Math.round(props.weather.wind.speed) + 'kph'} description='Wind'></CurrentDataItem>
+            <CurrentDataItem data={convertMillisecondsToTime(props.city.sunrise)} description='Sunrise'></CurrentDataItem>
+            <CurrentDataItem data={Math.round(props.weather.main.temp_min) + '°'} description='Min temp'></CurrentDataItem>
+            <CurrentDataItem data={Math.round(props.weather.pop * 100) + '%'} description='Rain'></CurrentDataItem>
+            <CurrentDataItem data={convertMillisecondsToTime(props.city.sunset)} description='Sunset'></CurrentDataItem>
         </div>
     )
 }

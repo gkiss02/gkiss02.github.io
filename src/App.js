@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import styles from './App.module.css';
 
 import Header from './Header/Header'
@@ -7,13 +9,44 @@ import HourlyCard from './Hourly/HourlyCard';
 import DailyCard from './Daily/DailyCard';
 
 function App() {
+  const [weather, setWeather] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
+  function getLocation() {
+    navigator.geolocation.getCurrentPosition(pos => {
+      const long = pos.coords.longitude;
+      const lat = pos.coords.latitude;
+      getWeather(lat,long)
+    })
+  }
+  
+  async function getWeather(lat, long) {
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&units=metric&appid=a3b33f459b2defd8cb549f46a5a5b35c`)
+    const data = await res.json();
+    console.log(data);
+    setWeather(data);
+    setIsLoading(false);
+  }
+
+  if (isLoading) {
+    return (
+      <div>
+        Loading...
+      </div>
+    )
+  }
+
   return (
     <div className={styles.container}>
-      <Header></Header>
+      <Header location={weather.city}></Header>
       <div className={styles['current-container']}>
-        <CurrentTemperature></CurrentTemperature>
+        <CurrentTemperature weather={weather.list[0]}></CurrentTemperature>
         <div className={styles.line}></div>
-        <CurrentDatas></CurrentDatas>
+        <CurrentDatas weather={weather.list[0]} city={weather.city}></CurrentDatas>
       </div>
       <p className={styles['section-title']}>Today's weather</p>
       <div className={styles['hourly-container']}>
@@ -34,5 +67,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
