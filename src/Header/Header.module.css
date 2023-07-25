@@ -1,3 +1,9 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .location {
     font-weight: 500;
     font-size: 1.75rem;
@@ -5,4 +11,21 @@
 
 .date {
     font-size: 1rem;
+}
+
+.search-bar {
+    background-color: transparent;
+    border: 1px white solid;
+    width: 11rem;
+    height: 1.5rem;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    padding: 0 .5rem;
+}
+
+
+.search-bar::placeholder {
+    color:whitesmoke;
+    opacity: .3;
 }

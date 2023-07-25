@@ -10,3 +10,7 @@
     gap: .75rem;
     align-items: center;
 }
+
+.icon {
+    width: 3rem;
+}

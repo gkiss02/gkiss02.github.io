@@ -12,6 +12,9 @@ function App() {
   const [weather, setWeather] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
+  const currentDate = new Date();
+  const subtractedDate = new Date().setHours(currentDate.getHours() + 7);
+
   useEffect(() => {
     getLocation();
   }, []);
@@ -20,14 +23,22 @@ function App() {
     navigator.geolocation.getCurrentPosition(pos => {
       const long = pos.coords.longitude;
       const lat = pos.coords.latitude;
-      getWeather(lat,long)
+      getLocationLink(lat,long)
     })
   }
+
+  function getLocationLink(lat, long) {
+     getWeather(`https://api.weatherapi.com/v1/forecast.json?q=${lat}%2C%20${long}&days=3&key=0fe02bee81a74a74b8e122358212212`);
+  }
+
+  function getSearchLink(search) {
+    getWeather(`https://api.weatherapi.com/v1/forecast.json?q=${search}&days=3&key=0fe02bee81a74a74b8e122358212212`);
+    setIsLoading(true);
+  }
   
-  async function getWeather(lat, long) {
-    const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&units=metric&appid=a3b33f459b2defd8cb549f46a5a5b35c`)
+  async function getWeather(link) {
+    const res = await fetch(link)
     const data = await res.json();
-    console.log(data);
     setWeather(data);
     setIsLoading(false);
   }
@@ -42,28 +53,27 @@ function App() {
 
   return (
     <div className={styles.container}>
-      <Header location={weather.city}></Header>
+      <Header location={weather.location} func={getSearchLink}></Header>
       <div className={styles['current-container']}>
-        <CurrentTemperature weather={weather.list[0]}></CurrentTemperature>
+        <CurrentTemperature current={weather.current}></CurrentTemperature>
         <div className={styles.line}></div>
-        <CurrentDatas weather={weather.list[0]} city={weather.city}></CurrentDatas>
+        <CurrentDatas weather={weather.forecast.forecastday[0]}></CurrentDatas>
       </div>
       <p className={styles['section-title']}>Today's weather</p>
       <div className={styles['hourly-container']}>
-        <HourlyCard hour='6am' temp='20°'></HourlyCard>
-        <HourlyCard hour='7am' temp='20°'></HourlyCard>
-        <HourlyCard hour='8am' temp='20°'></HourlyCard>
-        <HourlyCard hour='9am' temp='20°'></HourlyCard>
-        <HourlyCard hour='10am' temp='20°'></HourlyCard>
-        <HourlyCard hour='11am' temp='20°'></HourlyCard>
-        <HourlyCard hour='12am' temp='20°'></HourlyCard>
+        {weather.forecast.forecastday[0].hour.map(item =>
+          currentDate < new Date(item.time) && subtractedDate > new Date(item.time) && 
+          <HourlyCard hour={new Date(item.time).getHours()} src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}></HourlyCard>
+          )}
+        {currentDate.getHours() > 17 && weather.forecast.forecastday[1].hour.map((item, index) =>
+          currentDate.getHours() - 17 >= index && 
+          <HourlyCard hour={new Date(item.time).getHours()} temp={Math.round(item.temp_c) + '°'}></HourlyCard>
+        )}  
       </div>
-      <p className={styles['section-title']}>Next 5 days</p>
-      <DailyCard></DailyCard>
-      <DailyCard></DailyCard>
-      <DailyCard></DailyCard>
-      <DailyCard></DailyCard>
-      <DailyCard></DailyCard>
+      <p className={styles['section-title']}>Next 4 days</p>
+      {weather.forecast.forecastday.map((item, index) =>
+        index > 0 && <DailyCard weather={item}></DailyCard>
+      )}
     </div>
   );
 }
