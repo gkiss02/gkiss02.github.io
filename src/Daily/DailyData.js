@@ -4,7 +4,7 @@ function DailyData(props) {
     return (
         <div className={styles.container}>
             <p>{props.data}</p>
-            <p>{props.description}</p>
+            <p className={styles.description}>{props.description}</p>
         </div>
     )
 }

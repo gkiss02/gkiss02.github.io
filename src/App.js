@@ -44,33 +44,38 @@ function App() {
   
   async function getWeather(link) {
     const res = await fetch(link)
-    if (!res.ok) setError(true)
-    if (res.status == 400) setNoFound(true);
+    if (!res.ok) setError(true);
     const data = await res.json();
+    if (!res.ok && data.error.code == 1006) setNoFound(true);
     setWeather(data);
     setIsLoading(false);
   }
 
   if (isLoading) {
     return (
-      <div>
-        Loading...
+      <div className={styles['loading-container']}>
+        <div class={styles['lds-ring']}>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>  
       </div>
     )
   }
 
   if (noFound) {
     return (
-      <div>
+      <div className={styles['not-found_container']}>
         <p>City not found</p>
-        <button onClick={goBackHandler}>Go back</button>
+        <button onClick={goBackHandler} className={styles['not-found_button']}>Go back</button>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div>
+      <div className={styles['error-container']}>
         <p>Something went wrong</p>
       </div>
     )
@@ -88,11 +93,11 @@ function App() {
       <div className={styles['hourly-container']}>
         {weather.forecast.forecastday[0].hour.map(item =>
           new Date(weather.location.localtime) < new Date(item.time) && 
-          new Date(weather.location.localtime).setHours(new Date(weather.location.localtime).getHours() + 7) > new Date(item.time) && 
+          new Date(weather.location.localtime).setHours(new Date(weather.location.localtime).getHours() + 8) > new Date(item.time) && 
           <HourlyCard hour={new Date(item.time).getHours()} src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}></HourlyCard>
           )}
-        {new Date(weather.location.localtime).getHours() > 17 && weather.forecast.forecastday[1].hour.map((item, index) =>
-          new Date(weather.location.localtime).getHours() - 17 >= index && 
+        {new Date(weather.location.localtime).getHours() > 16 && weather.forecast.forecastday[1].hour.map((item, index) =>
+          new Date(weather.location.localtime).getHours() - 16 >= index && 
           <HourlyCard hour={new Date(item.time).getHours()} src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}></HourlyCard>
         )}  
       </div>
@@ -103,6 +108,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

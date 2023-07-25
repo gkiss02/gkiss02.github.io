@@ -4,7 +4,7 @@
 }
 
 .icon {
-    width: 7rem;
+    width: 12rem;
 }
 
 .text-container {
@@ -15,11 +15,11 @@
 }
 
 .temperature {
-    font-size: 5rem;
+    font-size: 6rem;
 }
 
 .description {
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
 
 .description::first-letter {
@@ -27,6 +27,15 @@
 }
 
 .celsius-sign {
-    font-size: 3rem;
+    font-size: 4rem;
     vertical-align: top;
 }
+
+@media screen and (max-width: 550px){
+    .container {
+        justify-content: center;
+    }
+    .temperature {
+        font-size: 6rem;
+    }
+  }

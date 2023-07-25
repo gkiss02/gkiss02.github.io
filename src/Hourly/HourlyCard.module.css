@@ -4,13 +4,12 @@
     max-width: 10rem;
     display: flex;
     flex-direction: column;
-    font-size: 1rem;
-    padding: .5rem;
+    font-size: 1.75rem;
     border-radius: 10px;
-    gap: .75rem;
+    padding: .75rem 0;
     align-items: center;
 }
 
 .icon {
-    width: 3rem;
+    width: 7rem;
 }

@@ -4,3 +4,9 @@
     gap: 1rem 2rem;
     align-content: space-evenly;
 }
+
+@media screen and (max-width: 550px){
+    .container {
+      gap: 2rem;
+    }
+  }
