@@ -17,7 +17,7 @@ function CurrentDatas (props) {
     return (
         <div className={styles.container}>
             <CurrentDataItem data={Math.round(props.weather.day.maxtemp_c) + '°'} description='Max temp'></CurrentDataItem>
-            <CurrentDataItem data={Math.round(props.weather.hour[new Date().getHours()].wind_kph) + 'kph'} description='Wind'></CurrentDataItem>
+            <CurrentDataItem data={Math.round(props.weather.hour[new Date(props.date).getHours()].wind_kph) + 'kph'} description='Wind'></CurrentDataItem>
             <CurrentDataItem data={dateFormatter(props.weather.astro.sunrise)} description='Sunrise'></CurrentDataItem>
             <CurrentDataItem data={Math.round(props.weather.day.mintemp_c) + '°'} description='Min temp'></CurrentDataItem>
             <CurrentDataItem data={Math.round(props.weather.day.daily_chance_of_rain) + '%'} description='Rain'></CurrentDataItem>

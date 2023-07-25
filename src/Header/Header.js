@@ -16,7 +16,7 @@ function Header (props) {
     return (
         <div className={styles.container}>
             <div>
-                <p className={styles.location}>{props.location.name}, {props.location.country.toString().substring(0, 2).toUpperCase()}</p>
+                <p className={styles.location}>{props.location.name}, {props.location.country}</p>
                 <p className={styles.date}>{daysOfWeek[date.getDay()]} {date.getDate()} {months[date.getMonth()]}</p>
             </div>
             <div>

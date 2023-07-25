@@ -11,9 +11,15 @@ import DailyCard from './Daily/DailyCard';
 function App() {
   const [weather, setWeather] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [noFound, setNoFound] = useState(false)
+  const [error, setError] = useState(false);
 
-  const currentDate = new Date();
-  const subtractedDate = new Date().setHours(currentDate.getHours() + 7);
+  function goBackHandler () {
+    setError(false)
+    setNoFound(false)
+    setIsLoading(true)
+    getLocation();
+  }
 
   useEffect(() => {
     getLocation();
@@ -38,6 +44,8 @@ function App() {
   
   async function getWeather(link) {
     const res = await fetch(link)
+    if (!res.ok) setError(true)
+    if (res.status == 400) setNoFound(true);
     const data = await res.json();
     setWeather(data);
     setIsLoading(false);
@@ -51,23 +59,41 @@ function App() {
     )
   }
 
+  if (noFound) {
+    return (
+      <div>
+        <p>City not found</p>
+        <button onClick={goBackHandler}>Go back</button>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div>
+        <p>Something went wrong</p>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.container}>
       <Header location={weather.location} func={getSearchLink}></Header>
       <div className={styles['current-container']}>
         <CurrentTemperature current={weather.current}></CurrentTemperature>
         <div className={styles.line}></div>
-        <CurrentDatas weather={weather.forecast.forecastday[0]}></CurrentDatas>
+        <CurrentDatas weather={weather.forecast.forecastday[0]} date={weather.location.localtime}></CurrentDatas>
       </div>
       <p className={styles['section-title']}>Today's weather</p>
       <div className={styles['hourly-container']}>
         {weather.forecast.forecastday[0].hour.map(item =>
-          currentDate < new Date(item.time) && subtractedDate > new Date(item.time) && 
+          new Date(weather.location.localtime) < new Date(item.time) && 
+          new Date(weather.location.localtime).setHours(new Date(weather.location.localtime).getHours() + 7) > new Date(item.time) && 
           <HourlyCard hour={new Date(item.time).getHours()} src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}></HourlyCard>
           )}
-        {currentDate.getHours() > 17 && weather.forecast.forecastday[1].hour.map((item, index) =>
-          currentDate.getHours() - 17 >= index && 
-          <HourlyCard hour={new Date(item.time).getHours()} temp={Math.round(item.temp_c) + '°'}></HourlyCard>
+        {new Date(weather.location.localtime).getHours() > 17 && weather.forecast.forecastday[1].hour.map((item, index) =>
+          new Date(weather.location.localtime).getHours() - 17 >= index && 
+          <HourlyCard hour={new Date(item.time).getHours()} src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}></HourlyCard>
         )}  
       </div>
       <p className={styles['section-title']}>Next 4 days</p>
