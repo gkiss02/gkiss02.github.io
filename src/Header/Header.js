@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faX } from '@fortawesome/free-solid-svg-icons'
 
+import getValidDate from '../HelperFunctions/getValidDate';
+
 function Header (props) {
     const[visibility, setVisibility] = useState(true);
 
@@ -19,7 +21,7 @@ function Header (props) {
         setVisibility(!visibility)
     }
 
-    const date = new Date(props.location.localtime);
+    const date = getValidDate(props.location.localtime);
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -33,13 +35,13 @@ function Header (props) {
             <div className={styles['search-icon_container']} onClick={visibilityHandler}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} size='3x' color='rgb(43,50,178)'/>
             </div>}
-                {!visibility &&
-                <div className={styles['search-bar_container']}>
-                    <input type='text' className={styles['search-bar']} placeholder='New York' onKeyDown={searchHandler} ref={search}></input>
-                    <span className={styles['search-close']} onClick={visibilityHandler}>
-                        <FontAwesomeIcon icon={faX}/>
-                    </span>
-                </div>}
+            {!visibility &&
+            <div className={styles['search-bar_container']}>
+                <input type='text' className={styles['search-bar']} placeholder='New York' onKeyDown={searchHandler} ref={search}></input>
+                <span className={styles['search-close']} onClick={visibilityHandler}>
+                    <FontAwesomeIcon icon={faX}/>
+                </span>
+            </div>}
         </div>
     )
 }

@@ -8,6 +8,8 @@ import CurrentDatas from './Current/CurrentDatas';
 import HourlyCard from './Hourly/HourlyCard';
 import DailyCard from './Daily/DailyCard';
 
+import getValidDate from './HelperFunctions/getValidDate';
+
 function App() {
   const [weather, setWeather] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -34,7 +36,7 @@ function App() {
   }
 
   function getLocationLink(lat, long) {
-     getWeather(`https://api.weatherapi.com/v1/forecast.json?q=${lat}%2C%20${long}&days=3&key=0fe02bee81a74a74b8e122358212212`);
+    getWeather(`https://api.weatherapi.com/v1/forecast.json?q=${lat}%2C%20${long}&days=3&key=0fe02bee81a74a74b8e122358212212`);
   }
 
   function getSearchLink(search) {
@@ -54,7 +56,7 @@ function App() {
   if (isLoading) {
     return (
       <div className={styles['loading-container']}>
-        <div class={styles['lds-ring']}>
+        <div className={styles['lds-ring']}>
           <div></div>
           <div></div>
           <div></div>
@@ -91,19 +93,19 @@ function App() {
       </div>
       <p className={styles['section-title']}>Today's weather</p>
       <div className={styles['hourly-container']}>
-        {weather.forecast.forecastday[0].hour.map(item =>
-          new Date(weather.location.localtime) < new Date(item.time) && 
-          new Date(weather.location.localtime).setHours(new Date(weather.location.localtime).getHours() + 8) > new Date(item.time) && 
-          <HourlyCard hour={new Date(item.time).getHours()} src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}></HourlyCard>
+        {weather.forecast.forecastday[0].hour.map((item, index) =>
+          getValidDate(weather.location.localtime) < getValidDate(item.time) && 
+          getValidDate(weather.location.localtime).setHours(getValidDate(weather.location.localtime).getHours() + 8) > getValidDate(item.time) && 
+          <HourlyCard key={index} hour={getValidDate(item.time).getHours()} src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}></HourlyCard>
           )}
-        {new Date(weather.location.localtime).getHours() > 16 && weather.forecast.forecastday[1].hour.map((item, index) =>
-          new Date(weather.location.localtime).getHours() - 16 >= index && 
-          <HourlyCard hour={new Date(item.time).getHours()} src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}></HourlyCard>
+        {getValidDate(weather.location.localtime).getHours() >= 16 && weather.forecast.forecastday[1].hour.map((item, index) =>
+          getValidDate(weather.location.localtime).getHours() - 16 >= index && 
+          <HourlyCard key={index} hour={getValidDate(item.time).getHours()} src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}></HourlyCard>
         )}  
       </div>
       <p className={styles['section-title']}>Next 4 days</p>
       {weather.forecast.forecastday.map((item, index) =>
-        index > 0 && <DailyCard weather={item}></DailyCard>
+        index > 0 && <DailyCard key={index} weather={item}></DailyCard>
       )}
     </div>
   );
