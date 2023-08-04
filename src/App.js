@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import styles from './App.module.css';
 
+import Menu from './Menu/Menu'
 import Header from './Header/Header'
 import CurrentTemperature from './Current/CurrentTemperature';
 import CurrentDatas from './Current/CurrentDatas';
@@ -84,8 +85,10 @@ function App() {
   }
 
   return (
+    <>
+    <Menu func={getSearchLink}></Menu>
     <div className={styles.container}>
-      <Header location={weather.location} func={getSearchLink}></Header>
+      <Header location={weather.location}></Header>
       <div className={styles['current-container']}>
         <CurrentTemperature current={weather.current}></CurrentTemperature>
         <div className={styles.line}></div>
@@ -108,6 +111,7 @@ function App() {
         index > 0 && <DailyCard key={index} weather={item}></DailyCard>
       )}
     </div>
+    </>
   );
 }
 

@@ -6,7 +6,10 @@ function DailyCard (props) {
     const date = new Date(props.weather.date);
     return (
         <div className={styles.container}>
-            <DailyData data={date.toString().split(' ')[0]} description={`${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate()}.`}></DailyData>
+            <DailyData 
+                data={date.toString().split(' ')[0]} 
+                description={`${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}.`}>
+            </DailyData>
             <img src={props.weather.day.condition.icon} className={styles.icon}></img>
             <DailyData data={Math.round(props.weather.day.mintemp_c) + '°'} description='Low'></DailyData>
             <DailyData data={Math.round(props.weather.day.maxtemp_c) + '°'} description='High'></DailyData>
