@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 
 import styles from './App.module.css';
 
-import Menu from './Menu/Menu'
-import Header from './Header/Header'
-import CurrentTemperature from './Current/CurrentTemperature';
-import CurrentDatas from './Current/CurrentDatas';
-import HourlyCard from './Hourly/HourlyCard';
-import DailyCard from './Daily/DailyCard';
+import Menu from './Components/Menu/Menu'
+import Header from './Components/Header/Header'
+import CurrentTemperature from './Components/Current/CurrentTemperature';
+import CurrentDatas from './Components/Current/CurrentDatas';
+import HourlyCard from './Components/Hourly/HourlyCard';
+import DailyCard from './Components/Daily/DailyCard';
+import FavoriteCities from './Context/FavoriteCities';
 
 import getValidDate from './HelperFunctions/getValidDate';
 
@@ -85,33 +86,48 @@ function App() {
   }
 
   return (
-    <>
+    <FavoriteCities>
     <Menu func={getSearchLink}></Menu>
     <div className={styles.container}>
       <Header location={weather.location}></Header>
       <div className={styles['current-container']}>
         <CurrentTemperature current={weather.current}></CurrentTemperature>
         <div className={styles.line}></div>
-        <CurrentDatas weather={weather.forecast.forecastday[0]} date={weather.location.localtime}></CurrentDatas>
+        <CurrentDatas 
+          weather={weather.forecast.forecastday[0]} 
+          date={weather.location.localtime}>
+        </CurrentDatas>
       </div>
       <p className={styles['section-title']}>Today's weather</p>
       <div className={styles['hourly-container']}>
         {weather.forecast.forecastday[0].hour.map((item, index) =>
           getValidDate(weather.location.localtime) < getValidDate(item.time) && 
           getValidDate(weather.location.localtime).setHours(getValidDate(weather.location.localtime).getHours() + 8) > getValidDate(item.time) && 
-          <HourlyCard key={index} hour={getValidDate(item.time).getHours()} src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}></HourlyCard>
+          <HourlyCard 
+            key={index} 
+            hour={getValidDate(item.time).getHours()} 
+            src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}>
+          </HourlyCard>
           )}
         {getValidDate(weather.location.localtime).getHours() >= 16 && weather.forecast.forecastday[1].hour.map((item, index) =>
           getValidDate(weather.location.localtime).getHours() - 16 >= index && 
-          <HourlyCard key={index} hour={getValidDate(item.time).getHours()} src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}></HourlyCard>
+          <HourlyCard 
+            key={index} 
+            hour={getValidDate(item.time).getHours()} 
+            src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}>
+          </HourlyCard>
         )}  
       </div>
       <p className={styles['section-title']}>Next 4 days</p>
       {weather.forecast.forecastday.map((item, index) =>
-        index > 0 && <DailyCard key={index} weather={item}></DailyCard>
+        index > 0 && 
+        <DailyCard 
+          key={index} 
+          weather={item}>
+        </DailyCard>
       )}
     </div>
-    </>
+    </FavoriteCities>
   );
 }
 

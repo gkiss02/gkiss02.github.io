@@ -2,7 +2,7 @@ import styles from './CurrentDatas.module.css'
 
 import CurrentDataItem from './CurrentDataItem';
 
-import getValidDate from '../HelperFunctions/getValidDate';
+import getValidDate from '../../HelperFunctions/getValidDate';
 
 function dateFormatter (date) {
     const time = date.toString().split(' ')[0];
