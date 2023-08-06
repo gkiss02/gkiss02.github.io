@@ -1,0 +1,32 @@
+.container {
+    position: absolute;
+    z-index: 1;
+    margin-top: 2.5rem;
+    width: 12rem;
+    background-color: #2a41af;
+    max-height: 15rem;
+    overflow-y: scroll;
+    border: 1px white solid;
+    border-radius: 5px;
+}
+
+.no-items, .item {
+    padding: .5rem 1rem;
+    font-size: 1.5rem;
+}
+
+.item {
+    border-top: 1px white solid;
+}
+
+.item:first-child {
+    border-top: none;
+}
+
+.item:last-child {
+    border-bottom: none;
+}
+
+.item:hover {
+    background-color: rgba(211, 211, 211, .2);
+}

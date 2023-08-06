@@ -21,14 +21,12 @@ function Header (props) {
     const isFavorite = cities.arr.includes(cityName)
 
     function addCityHandler () {
-        if (!cities.arr.includes(cityName)) {
-            const arr = []
-            for (let i = 0; i < cities.arr.length; i++) {
-                arr[i] = cities.arr[i]
-            }
-            arr.push(cityName);
-            cities.citySetter(arr)
+        const arr = []
+        for (let i = 0; i < cities.arr.length; i++) {
+            arr[i] = cities.arr[i]
         }
+        arr.push(cityName);
+        cities.citySetter(arr)
     }
 
     function removeCityHandler () {

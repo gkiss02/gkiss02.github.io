@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-
 import styles from './App.module.css';
-
 import Menu from './Components/Menu/Menu'
 import Header from './Components/Header/Header'
 import CurrentTemperature from './Components/Current/CurrentTemperature';
@@ -9,7 +7,6 @@ import CurrentDatas from './Components/Current/CurrentDatas';
 import HourlyCard from './Components/Hourly/HourlyCard';
 import DailyCard from './Components/Daily/DailyCard';
 import FavoriteCities from './Context/FavoriteCities';
-
 import getValidDate from './HelperFunctions/getValidDate';
 
 function App() {

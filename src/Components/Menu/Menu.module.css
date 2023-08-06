@@ -55,3 +55,8 @@
 .menu-item:hover {
     background-color: rgb(20, 28, 180);
 }
+
+.favorites {
+    width: 12rem;
+    text-align: center;
+}
