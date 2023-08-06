@@ -14,7 +14,7 @@ function Favorites (props) {
             {cities.arr.length === 0 ? 
             <p className={styles['no-items']}>No favorites yet, add some!</p> :
             cities.arr.map(item =>
-                <p className={styles.item} onClick={clickHandle} id={item}>{item}</p>
+                <p key={item} className={styles.item} onClick={clickHandle} id={item}>{item}</p>
             )}
         </div>
     )

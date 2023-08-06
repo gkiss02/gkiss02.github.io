@@ -84,7 +84,7 @@ function App() {
 
   return (
     <FavoriteCities>
-    <Menu func={getSearchLink}></Menu>
+    <Menu getSearch={getSearchLink} getLocation={getLocation}></Menu>
     <div className={styles.container}>
       <Header location={weather.location}></Header>
       <div className={styles['current-container']}>

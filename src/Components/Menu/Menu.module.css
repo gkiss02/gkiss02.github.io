@@ -19,6 +19,20 @@
     font-size: 1.5rem;
 }
 
+.location {
+    font-size: 3rem;
+    margin-right: 4rem;
+}
+
+.location:hover {
+    cursor: pointer;
+    color: lightslategrey;
+}
+
+.search-container {
+    position: relative;
+}
+
 .search-bar {
     background-color: transparent;
     border: 1px white solid;
@@ -35,6 +49,14 @@
 .search-bar::placeholder {
     color:whitesmoke;
     opacity: .3;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
 .menu-items_container {
