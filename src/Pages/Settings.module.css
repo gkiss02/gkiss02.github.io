@@ -1,0 +1,77 @@
+:root {
+    --save-button-color: rgb(55, 192, 55);
+    --cancel-button-color: rgb(192, 55, 55);
+
+}
+
+.container {
+    margin: 0 auto;
+    width: 70%
+}
+
+.link {
+    font-size: 3.5rem;
+}
+
+.link:hover {
+    color: lightslategrey;
+}
+
+.settings-container {
+    margin: 2rem auto 0;
+    width: fit-content;
+}
+
+.button-container {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.button {
+    font-size: 1.5rem;
+    width: 10rem;
+    height: 2.5rem;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+.clear {
+    border: 1px white solid;
+    background-color: transparent;
+    cursor: pointer;
+    width: 100%;
+    height: 2.5rem;
+    border-radius: 5px;
+    color: white;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+}
+
+.clear:hover {
+    background-color: white;
+    color: #2f54b6
+}
+
+.save {
+    border: 1px solid var(--save-button-color);
+    color: var(--save-button-color)
+}
+
+
+.save:hover {
+    background-color: var(--save-button-color);
+    color: white;
+}
+
+.cancel {
+    border: 1px solid var(--cancel-button-color);
+    color: var(--cancel-button-color);
+}
+
+.cancel:hover {
+    background-color: var(--cancel-button-color);
+    color: white;
+}

@@ -8,6 +8,7 @@
     overflow-y: scroll;
     border: 1px white solid;
     border-radius: 5px;
+    box-shadow: 0.75px 0.75px 5px black;
 }
 
 .no-items, .item {

@@ -5,6 +5,7 @@
     background-color:  rgb(36, 43, 180);
     padding: 0 7rem;
     font-size: 1.8rem;
+    margin-bottom: 2rem;
 }
 
 .menu-container {
@@ -81,4 +82,13 @@
 .favorites {
     width: 12rem;
     text-align: center;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }

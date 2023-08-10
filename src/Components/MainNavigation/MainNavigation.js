@@ -1,10 +1,11 @@
-import styles from './Menu.module.css'
+import styles from './MainNavigation.module.css';
 import { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudSunRain } from '@fortawesome/free-solid-svg-icons'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import Favorites from './Favorites';
+import { NavLink } from 'react-router-dom';
 
 function Menu (props) {
     const search = useRef()
@@ -44,9 +45,11 @@ function Menu (props) {
                             {visibility && <Favorites func={props.getSearch}></Favorites>}
                         </div>
                     </div>
-                    <div className={styles['menu-item']}>
-                        <p>Settings</p>
-                    </div>
+                    <NavLink to={'/settings'}>
+                        <div className={styles['menu-item']}>
+                            <li>Settings</li>
+                        </div>
+                    </NavLink>
                 </div>
             </div>
         </div>

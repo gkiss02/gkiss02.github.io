@@ -1,10 +1,7 @@
 import styles from './Header.module.css'
-
 import { useState, useContext } from 'react';
 import { FavoriteCitiesCTX } from '../../Context/Context';
-
 import getValidDate from '../../HelperFunctions/getValidDate';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as heartEmpty} from '@fortawesome/free-regular-svg-icons'
 import { faHeart as heartFilled} from '@fortawesome/free-solid-svg-icons'

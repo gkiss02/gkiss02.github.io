@@ -1,0 +1,20 @@
+.container {
+    margin: 1.75rem auto 0;
+    display: flex;
+    gap: 4.5rem;
+    font-size: 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.select {
+    width: 10rem;
+    height: 3rem;
+    outline: none;
+    border: white 1px solid;
+    border-radius: 5px;
+    padding: 0 .75rem;
+    background-color: transparent;
+    color: white;
+    font-size: 1.5rem;
+}
