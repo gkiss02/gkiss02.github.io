@@ -14,3 +14,13 @@ export const WeatherDataCTX = createContext({
     error: false,
     goBackHandler: () => {}
 })
+
+export const SettingsCTX = createContext({
+    timeFormat: '24',
+    language: 'ENG',
+    unit: 'Imperial',
+    timeFormatSetter: (item) => {},
+    languageSetter: (item) => {},
+    unitSetter: (item) => {},
+})
+

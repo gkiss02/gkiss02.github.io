@@ -1,7 +1,5 @@
 import styles from './CurrentDatas.module.css'
-
 import CurrentDataItem from './CurrentDataItem';
-
 import getValidDate from '../../HelperFunctions/getValidDate';
 
 function dateFormatter (date) {

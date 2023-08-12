@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import styles from './Weather.module.css';
 import Header from '../Components/Header/Header'
 import CurrentTemperature from '../Components/Current/CurrentTemperature';
@@ -11,10 +11,6 @@ import { WeatherDataCTX } from '../Context/Context';
 function Weather() {
     const weather = useContext(WeatherDataCTX);
     const weatherData =weather.weather;
-
-    useEffect(() => {
-        weather.getLocation();
-    }, [])
 
     if (weather.isLoading) {
         return (

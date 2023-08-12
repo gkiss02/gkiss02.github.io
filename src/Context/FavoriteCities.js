@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { FavoriteCitiesCTX } from './Context'
 
 function FavoriteCities(props) {
-    const [cities, setCities] = useState(
-        localStorage.getItem('favoriteCities')  == null ? [] : JSON.parse(localStorage.getItem('favoriteCities'))
-    )
+    const [cities, setCities] = useState(localStorage.getItem('favoriteCities')  == null ? [] : JSON.parse(localStorage.getItem('favoriteCities')))
 
     const obj = {
         arr: cities,

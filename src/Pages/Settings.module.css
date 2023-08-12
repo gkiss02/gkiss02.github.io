@@ -23,9 +23,10 @@
 }
 
 .button-container {
-    margin-top: 2.5rem;
+    margin-top: 2rem;
     display: flex;
     justify-content: flex-end;
+    align-items: flex-end;
     gap: 1rem;
 }
 
