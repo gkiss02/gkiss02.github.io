@@ -5,14 +5,12 @@
 
 .current-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     gap: .5rem;
-    margin: 3rem auto 2.5rem;
 }
 
 .line {
-    position: absolute;
     height: 16rem;
     width: .1rem;
     background-color: white;
@@ -91,6 +89,10 @@
 
 .lds-ring div:nth-child(3) {
     animation-delay: -0.15s;
+}
+
+.current-item {
+    flex: 1;
 }
 
 @keyframes lds-ring {

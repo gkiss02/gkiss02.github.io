@@ -6,11 +6,13 @@ import CurrentDatas from '../Components/Current/CurrentDatas';
 import HourlyCard from '../Components/Hourly/HourlyCard';
 import DailyCard from '../Components/Daily/DailyCard';
 import getValidDate from '../HelperFunctions/getValidDate';
-import { WeatherDataCTX } from '../Context/Context';
+import { WeatherDataCTX, SettingsCTX } from '../Context/Context';
 
 function Weather() {
     const weather = useContext(WeatherDataCTX);
     const weatherData =weather.weather;
+    const metric = useContext(SettingsCTX).unit == 'Metric';
+    const tempUnit = metric ? '°C' : '°F';
 
     if (weather.isLoading) {
         return (
@@ -46,12 +48,16 @@ function Weather() {
         <div className={styles.container}>
             <Header location={weatherData.location}></Header>
             <div className={styles['current-container']}>
+                <div className={styles['current-item']}>
                 <CurrentTemperature current={weatherData.current}></CurrentTemperature>
+                </div>
                 <div className={styles.line}></div>
+                <div className={styles['current-item']}>
                 <CurrentDatas 
                     weather={weatherData.forecast.forecastday[0]} 
                     date={weatherData.location.localtime}>
                 </CurrentDatas>
+                </div>
             </div>
             <p className={styles['section-title']}>Today's weather</p>
             <div className={styles['hourly-container']}>
@@ -61,7 +67,8 @@ function Weather() {
                     <HourlyCard 
                         key={index} 
                         hour={getValidDate(item.time).getHours()} 
-                        src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}>
+                        src={item.condition.icon} 
+                        temp={`${Math.round(metric ? item.temp_c : item.temp_f)}${tempUnit}`}>
                     </HourlyCard>
                 )}
                 {getValidDate(weatherData.location.localtime).getHours() >= 16 && weatherData.forecast.forecastday[1].hour.map((item, index) =>
@@ -69,7 +76,8 @@ function Weather() {
                     <HourlyCard 
                         key={index} 
                         hour={getValidDate(item.time).getHours()} 
-                        src={item.condition.icon} temp={Math.round(item.temp_c) + '°'}>
+                        src={item.condition.icon} 
+                        temp={`${Math.round(metric ? item.temp_c : item.temp_f)}${tempUnit}`}>
                     </HourlyCard>
                 )}  
             </div>
