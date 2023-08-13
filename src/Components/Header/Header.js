@@ -1,21 +1,21 @@
 import styles from './Header.module.css'
 import { useState, useContext } from 'react';
-import { FavoriteCitiesCTX } from '../../Context/Context';
+import { FavoriteCitiesCTX, SettingsCTX } from '../../Context/Context';
 import getValidDate from '../../HelperFunctions/getValidDate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as heartEmpty} from '@fortawesome/free-regular-svg-icons'
 import { faHeart as heartFilled} from '@fortawesome/free-solid-svg-icons'
+import langDecider from '../../HelperFunctions/langDecider';
 
 function Header (props) {
     const date = getValidDate(props.location.localtime);
-    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     const [visibility, setVisibility] = useState(true)
-
     const cities = useContext(FavoriteCitiesCTX);
     const cityName = props.location.name
     const isFavorite = cities.arr.includes(cityName)
+    const lang = useContext(SettingsCTX).language;
+    const actualJson = langDecider(lang);
 
     function addCityHandler () {
         const arr = []
@@ -43,7 +43,7 @@ function Header (props) {
         <div className={styles.container}>
             <div>
                 <p className={styles.location}>{cityName}, {props.location.country}</p>
-                <p className={styles.date}>{daysOfWeek[date.getDay()]} {date.getDate()} {months[date.getMonth()]}</p>
+                <p className={styles.date}>{actualJson.days[date.getDay()]} {date.getDate()} {actualJson.months[date.getMonth()]}</p>
             </div>
             <div>
                 <FontAwesomeIcon icon={heartEmpty} 

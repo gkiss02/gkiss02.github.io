@@ -6,13 +6,16 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import Favorites from './Favorites';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { WeatherDataCTX } from '../../Context/Context';
+import { WeatherDataCTX, SettingsCTX } from '../../Context/Context';
+import langDecider from '../../HelperFunctions/langDecider';
 
 function Menu () {
     const search = useRef()
     const [visibility, setVisibility] = useState(false)
     const weatherData = useContext(WeatherDataCTX);
     const navigate = useNavigate();
+    const lang = useContext(SettingsCTX).language;
+    const actualJson = langDecider(lang);
     
     function searchHandler(event) {
         if (event.key == 'Enter' || event.type == 'click') {
@@ -53,13 +56,13 @@ function Menu () {
                         onMouseEnter={mouseEnterHandler}
                         onMouseLeave={mouseLeaveHandler}>
                         <div className={styles.favorites}>
-                            <p>Favorites</p>
+                            <p>{actualJson.favorites}</p>
                             {visibility && <Favorites func={weatherData.getSearchLink}></Favorites>}
                         </div>
                     </div>
                     <NavLink to={'/settings'}>
                         <div className={styles['menu-item']}>
-                            <li>Settings</li>
+                            <li>{actualJson.settings}</li>
                         </div>
                     </NavLink>
                 </div>

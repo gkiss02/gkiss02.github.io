@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Option from "../Components/Option/Option";
 import { useContext, useState } from "react";
 import { SettingsCTX, FavoriteCitiesCTX } from '../Context/Context';
+import langDecider from "../HelperFunctions/langDecider";
 
 function Settings() {
     const settings = useContext(SettingsCTX);
@@ -10,6 +11,8 @@ function Settings() {
     const [editedLanguage, setEditedLanguage] = useState(settings.language);
     const [editedUnit, setEditedUnit] = useState(settings.unit);
     const navigate = useNavigate();
+    const lang = useContext(SettingsCTX).language;
+    const actualJson = langDecider(lang);
 
     function getTimeFormat (edit) {
         setEditedTimeFormat(edit);
@@ -36,15 +39,30 @@ function Settings() {
                 <span>&larr;</span>
             </Link>
             <div className={styles['settings-container']}>
-                <Option name={'Time format'} options={['12', '24']} func={getTimeFormat} default={settings.timeFormat}></Option>
-                <Option name={'Language'} options={['eng', 'hu']} func={getLanguage} default={settings.language}></Option>
-                <Option name={'Unit'} options={['Imperial', 'Metric']} func={getMetric} default={settings.unit}></Option>
-                <button className={styles.clear}>Clear favorites</button>
+                <Option 
+                    name={actualJson["time-format"]} 
+                    options={['12', '24']} 
+                    func={getTimeFormat} 
+                    default={settings.timeFormat}>
+                </Option>
+                <Option 
+                    name={actualJson.language} 
+                    options={['en', 'hu']} 
+                    func={getLanguage} 
+                    default={settings.language}>
+                </Option>
+                <Option 
+                    name={actualJson.unit} 
+                    options={[actualJson.metric, actualJson.imperial]} 
+                    func={getMetric} 
+                    default={settings.unit}>
+                </Option>
+                <button className={styles.clear}>{actualJson["clear-favorites"]}</button>
                 <div className={styles['button-container']}>
                     <Link to={'/'} className={styles.link}>
-                        <button className={`${styles.cancel} ${styles.button}`}>Cancel</button>
+                        <button className={`${styles.cancel} ${styles.button}`}>{actualJson.cancel}</button>
                     </Link>
-                        <button className={`${styles.save} ${styles.button}`} onClick={saveHandler} >Save</button>
+                        <button className={`${styles.save} ${styles.button}`} onClick={saveHandler}>{actualJson.save}</button>
                 </div>
             </div>
         </div>

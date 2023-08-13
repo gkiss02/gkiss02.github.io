@@ -7,11 +7,14 @@ import HourlyCard from '../Components/Hourly/HourlyCard';
 import DailyCard from '../Components/Daily/DailyCard';
 import getValidDate from '../HelperFunctions/getValidDate';
 import { WeatherDataCTX, SettingsCTX } from '../Context/Context';
+import langDecider from '../HelperFunctions/langDecider';
 
 function Weather() {
     const weather = useContext(WeatherDataCTX);
     const weatherData =weather.weather;
-    const metric = useContext(SettingsCTX).unit == 'Metric';
+    const settings = useContext(SettingsCTX);
+    const actualJson = langDecider(settings.language);
+    const metric = settings.unit == actualJson.metric;
     const tempUnit = metric ? '°C' : '°F';
 
     if (weather.isLoading) {
@@ -30,8 +33,8 @@ function Weather() {
     if (weather.noFound) {
         return (
             <div className={styles['not-found_container']}>
-                <p>City not found</p>
-                <button onClick={weather.goBackHandler} className={styles['not-found_button']}>Go back</button>
+                <p>{actualJson['city-not-found']}</p>
+                <button onClick={weather.goBackHandler} className={styles['not-found_button']}>{actualJson['go-back']}</button>
         </div>
         )
     }
@@ -39,7 +42,7 @@ function Weather() {
     if (weather.error) {
         return (
             <div className={styles['error-container']}>
-                <p>Something went wrong</p>
+                <p>{actualJson['something-wrong']}</p>
             </div>
         )
     }
@@ -59,7 +62,7 @@ function Weather() {
                 </CurrentDatas>
                 </div>
             </div>
-            <p className={styles['section-title']}>Today's weather</p>
+            <p className={styles['section-title']}>{actualJson['todays-weather']}</p>
             <div className={styles['hourly-container']}>
                 {weatherData.forecast.forecastday[0].hour.map((item, index) =>
                     getValidDate(weatherData.location.localtime) < getValidDate(item.time) && 
@@ -81,7 +84,7 @@ function Weather() {
                     </HourlyCard>
                 )}  
             </div>
-            <p className={styles['section-title']}>Next 4 days</p>
+            <p className={styles['section-title']}>{actualJson['next-4-days']}</p>
                 {weatherData.forecast.forecastday.map((item, index) =>
                     index > 0 && 
                     <DailyCard 
