@@ -17,8 +17,8 @@ export const WeatherDataCTX = createContext({
 
 export const SettingsCTX = createContext({
     timeFormat: '24',
-    language: 'ENG',
-    unit: 'Imperial',
+    language: 'EN',
+    unit: 'Metric',
     timeFormatSetter: (item) => {},
     languageSetter: (item) => {},
     unitSetter: (item) => {},

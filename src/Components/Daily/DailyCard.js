@@ -7,10 +7,10 @@ import langDecider from '../../HelperFunctions/langDecider';
 function DailyCard (props) {
     const date = new Date(props.weather.date);
     const settings = useContext(SettingsCTX);
-    const metric = settings.unit == 'Metric';
-    const tempUnit = metric ? '°C' : '°F';
     const lang = settings.language;
     const actualJson = langDecider(lang);
+    const metric = settings.unit == actualJson.metric;
+    const tempUnit = metric ? '°C' : '°F';
 
     return (
         <div className={styles.container}>

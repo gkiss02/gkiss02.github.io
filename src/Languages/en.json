@@ -48,11 +48,17 @@
     "time-format": "Time format",
     "language": "Language",
     "unit": "Unit",
-    "clear-favorites": "Clear localstroage",
+    "clear-local-storage": "Clear local storage",
     "save": "Save",
     "cancel": "Cancel",
     "metric": "Metric",
     "imperial": "Imperial",
     "mph": "mph",
-    "kph": "kph"
+    "kph": "kph",
+    "are-you-sure": "Are you sure?",
+    "modal-text": "This will clear all your favorites and settings local storage. This action cannot be undone.",
+    "yes": "Yes",
+    "no": "No",
+    "am": "AM",
+    "pm": "PM"
 }

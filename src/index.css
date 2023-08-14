@@ -14,7 +14,7 @@ body {
   background-attachment: fixed;  
 }
 
-p, a, li {
+p, a, li, h2 {
   margin: 0;
 }
 

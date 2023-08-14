@@ -4,12 +4,15 @@ import Option from "../Components/Option/Option";
 import { useContext, useState } from "react";
 import { SettingsCTX, FavoriteCitiesCTX } from '../Context/Context';
 import langDecider from "../HelperFunctions/langDecider";
+import Modal from "../Components/Modal/Modal";
 
 function Settings() {
     const settings = useContext(SettingsCTX);
+    const favoriteCities = useContext(FavoriteCitiesCTX);
     const [editedTimeFormat, setEditedTimeFormat] = useState(settings.timeFormat);
     const [editedLanguage, setEditedLanguage] = useState(settings.language);
     const [editedUnit, setEditedUnit] = useState(settings.unit);
+    const [modal, setModal] = useState(false);
     const navigate = useNavigate();
     const lang = useContext(SettingsCTX).language;
     const actualJson = langDecider(lang);
@@ -33,6 +36,19 @@ function Settings() {
         navigate('/');
     }
 
+    function modalHandler () {
+        setModal(!modal);
+    }
+
+    function clearLocalStorage () {
+        setModal(!modal);
+        settings.languageSetter('EN')
+        settings.timeFormatSetter('24')
+        settings.unitSetter('Metric')
+        favoriteCities.citySetter([]);
+        navigate('/');
+    }
+
     return (
         <div className={styles.container}>
             <Link to={'/'} className={styles.link}>
@@ -47,7 +63,7 @@ function Settings() {
                 </Option>
                 <Option 
                     name={actualJson.language} 
-                    options={['en', 'hu']} 
+                    options={['EN', 'HU']} 
                     func={getLanguage} 
                     default={settings.language}>
                 </Option>
@@ -57,7 +73,8 @@ function Settings() {
                     func={getMetric} 
                     default={settings.unit}>
                 </Option>
-                <button className={styles.clear}>{actualJson["clear-favorites"]}</button>
+                <button className={styles.clear} onClick={modalHandler}>{actualJson["clear-local-storage"]}</button>
+                {modal && <Modal modalHandler={modalHandler} clearLocalStorage={clearLocalStorage}></Modal>}
                 <div className={styles['button-container']}>
                     <Link to={'/'} className={styles.link}>
                         <button className={`${styles.cancel} ${styles.button}`}>{actualJson.cancel}</button>

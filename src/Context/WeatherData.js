@@ -10,7 +10,7 @@ function WeatherData(props) {
     const settings =  useContext(SettingsCTX);
 
     async function getWeather(link) {
-        const res = await fetch(link + '&lang=' + settings.language)
+        const res = await fetch(link + '&lang=' + settings.language.toLowerCase())
         if (!res.ok) setError(true);
         const data = await res.json();
         if (!res.ok && data.error.code == 1006) setNoFound(true);

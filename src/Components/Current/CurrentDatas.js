@@ -20,7 +20,7 @@ function CurrentDatas (props) {
             const hour = Number(time.split(':')[0]) + 12;
             return hour + ':' +time.split(':')[1];
         }
-        return time + (settings.timeFormat == 12 ? ' ' + section : '')
+        return time + (settings.timeFormat == 12 ? ' ' + (section == 'AM' ? actualJson.am : actualJson.pm) : '')
     }
     
     return (

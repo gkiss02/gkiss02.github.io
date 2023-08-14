@@ -1,15 +1,18 @@
 import styles from './HourlyCard.module.css'
 import { SettingsCTX } from '../../Context/Context';
 import { useContext } from 'react';
+import langDecider from '../../HelperFunctions/langDecider';
 
 function HourlyCard (props) {
-    const timeFormat = useContext(SettingsCTX).timeFormat;
+    const settings = useContext(SettingsCTX);
+    const timeFormat = settings.timeFormat;
+    const actualJson = langDecider(settings.language);
 
     function timeFormatter (date) {
         if (timeFormat == '24') return date;
 
-        if (date < 12) return date + ' AM';
-        if (date > 12) return date - 12 + ' PM';
+        if (date < 12) return date + ' ' + actualJson.am;
+        if (date > 12) return date - 12 + ' ' + actualJson.pm;
     }
 
     return (
