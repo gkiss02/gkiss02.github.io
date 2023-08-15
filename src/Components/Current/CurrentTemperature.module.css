@@ -31,12 +31,3 @@
     font-size: 4rem;
     vertical-align: top;
 }
-
-@media screen and (max-width: 550px){
-    .container {
-        justify-content: center;
-    }
-    .temperature {
-        font-size: 6rem;
-    }
-  }

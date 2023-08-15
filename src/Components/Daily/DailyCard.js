@@ -9,7 +9,7 @@ function DailyCard (props) {
     const settings = useContext(SettingsCTX);
     const lang = settings.language;
     const actualJson = langDecider(lang);
-    const metric = settings.unit == actualJson.metric;
+    const metric = settings.unit == 'metric';
     const tempUnit = metric ? '°C' : '°F';
 
     return (
@@ -21,11 +21,11 @@ function DailyCard (props) {
             <img src={props.weather.day.condition.icon} className={styles.icon}></img>
             <DailyData 
                 data={`${Math.round(metric ? props.weather.day.mintemp_c : props.weather.day.mintemp_f)}${tempUnit}`} 
-                description={actualJson['min-temp']}>
+                description={actualJson.min}>
             </DailyData>
             <DailyData 
                 data={`${Math.round(metric ? props.weather.day.maxtemp_c : props.weather.day.maxtemp_f)}${tempUnit}`}
-                description={actualJson['max-temp']}>
+                description={actualJson.max}>
             </DailyData>
             <DailyData 
                 data={`${Math.round(metric ? props.weather.day.maxwind_kph : props.weather.day.maxwind_mph)}${metric ? actualJson.kph : actualJson.mph}`} 

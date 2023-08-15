@@ -1,12 +1,12 @@
 :root {
     --save-button-color: rgb(55, 192, 55);
     --cancel-button-color: rgb(192, 55, 55);
-
 }
 
 .container {
     margin: 0 auto;
-    width: 70%
+    width: 70%;
+    margin-top: 2rem;
 }
 
 .link {
@@ -37,6 +37,7 @@
     cursor: pointer;
     background-color: transparent;
     border-radius: 5px;
+    color: white;
 }
 
 .clear {

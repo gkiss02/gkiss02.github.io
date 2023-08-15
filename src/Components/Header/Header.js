@@ -1,5 +1,5 @@
 import styles from './Header.module.css'
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { FavoriteCitiesCTX, SettingsCTX } from '../../Context/Context';
 import getValidDate from '../../HelperFunctions/getValidDate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,8 +9,6 @@ import langDecider from '../../HelperFunctions/langDecider';
 
 function Header (props) {
     const date = getValidDate(props.location.localtime);
-
-    const [visibility, setVisibility] = useState(true)
     const cities = useContext(FavoriteCitiesCTX);
     const cityName = props.location.name
     const isFavorite = cities.arr.includes(cityName)
@@ -30,34 +28,18 @@ function Header (props) {
         const arr = cities.arr.filter(item => item != cityName)
         cities.citySetter(arr)
     }
-    
-    function mouseEnterHandler () {
-        setVisibility(false)
-    }
-
-    function mouseLeaveHandler () {
-        setVisibility(true)
-    }
 
     return (
         <div className={styles.container}>
-            <div>
+            <div className={styles['location-container']}>
                 <p className={styles.location}>{cityName}, {props.location.country}</p>
                 <p className={styles.date}>{actualJson.days[date.getDay()]} {date.getDate()} {actualJson.months[date.getMonth()]}</p>
             </div>
             <div>
-                <FontAwesomeIcon icon={heartEmpty} 
+                <FontAwesomeIcon icon={isFavorite ? heartFilled: heartEmpty} 
                     className={styles.icon} 
-                    onMouseEnter={mouseEnterHandler}
-                    onMouseLeave={mouseLeaveHandler}  
-                    style={{visibility: !isFavorite || visibility ? 'visible' : 'hidden'}}/>
-                <FontAwesomeIcon icon={heartFilled} 
-                    className={styles.icon} 
-                    onMouseEnter={mouseEnterHandler}
-                    onMouseLeave={mouseLeaveHandler} 
                     onClick={isFavorite ? removeCityHandler : addCityHandler}
-                    style={{visibility: isFavorite || !visibility ? 'visible' : 'hidden'}}
-                    color='red'/>    
+                    color={isFavorite ? 'red' : 'white'}/>  
             </div>
         </div>
     )

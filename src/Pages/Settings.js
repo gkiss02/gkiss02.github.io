@@ -44,7 +44,7 @@ function Settings() {
         setModal(!modal);
         settings.languageSetter('EN')
         settings.timeFormatSetter('24')
-        settings.unitSetter('Metric')
+        settings.unitSetter('metric')
         favoriteCities.citySetter([]);
         navigate('/');
     }
@@ -57,19 +57,19 @@ function Settings() {
             <div className={styles['settings-container']}>
                 <Option 
                     name={actualJson["time-format"]} 
-                    options={['12', '24']} 
+                    options={[['12', '12'], ['24', '24']]} 
                     func={getTimeFormat} 
                     default={settings.timeFormat}>
                 </Option>
                 <Option 
                     name={actualJson.language} 
-                    options={['EN', 'HU']} 
+                    options={[['EN', 'EN'], ['HU', 'HU']]} 
                     func={getLanguage} 
                     default={settings.language}>
                 </Option>
                 <Option 
                     name={actualJson.unit} 
-                    options={[actualJson.metric, actualJson.imperial]} 
+                    options={[['metric', actualJson.metric], ['imperial', actualJson.imperial]]} 
                     func={getMetric} 
                     default={settings.unit}>
                 </Option>

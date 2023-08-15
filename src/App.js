@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import FavoriteCities from './Context/FavoriteCities'
 import WeatherData from './Context/WeatherData'
 import SettingsProvider from './Context/SettingProvider';
+import FavoritesPage from './Pages/FavoritesPage';
 
 function App() {
   const router = createBrowserRouter([
@@ -13,7 +14,8 @@ function App() {
       element: <RootLayout></RootLayout>,
       children: [
         { path: '/', element: <Weather></Weather> },
-        { path: '/settings', element: <Settings></Settings> }
+        { path: '/settings', element: <Settings></Settings> },
+        { path: '/favorites', element: <FavoritesPage></FavoritesPage> }
       ]
     }
   ]);

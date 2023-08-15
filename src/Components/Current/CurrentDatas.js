@@ -9,7 +9,7 @@ function CurrentDatas (props) {
     const settings = useContext(SettingsCTX);
     const getHour = props.weather.hour[getValidDate(props.date).getHours()];
     const actualJson = langDecider(settings.language);
-    const metric = settings.unit == actualJson.metric;
+    const metric = settings.unit == 'metric';
     const tempUnit = metric ? '°C' : '°F';
     
     function dateFormatter (date) {

@@ -14,7 +14,7 @@ function Weather() {
     const weatherData =weather.weather;
     const settings = useContext(SettingsCTX);
     const actualJson = langDecider(settings.language);
-    const metric = settings.unit == actualJson.metric;
+    const metric = settings.unit == 'metric';
     const tempUnit = metric ? '°C' : '°F';
 
     if (weather.isLoading) {

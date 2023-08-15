@@ -11,7 +11,7 @@ function HourlyCard (props) {
     function timeFormatter (date) {
         if (timeFormat == '24') return date;
 
-        if (date < 12) return date + ' ' + actualJson.am;
+        if (date <= 12) return date + ' ' + actualJson.am;
         if (date > 12) return date - 12 + ' ' + actualJson.pm;
     }
 

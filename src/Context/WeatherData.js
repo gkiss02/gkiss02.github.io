@@ -41,7 +41,7 @@ function WeatherData(props) {
         setError(false)
         setNoFound(false)
         setIsLoading(true)
-        getLocation();
+        getWeather(`https://api.weatherapi.com/v1/forecast.json?q=${JSON.parse(localStorage.getItem('recent'))}&days=3&key=0fe02bee81a74a74b8e122358212212`)
     }
 
     const obj = {

@@ -60,5 +60,8 @@
     "yes": "Igen",
     "no": "Nem",
     "am": "DE",
-    "pm": "DU"
+    "pm": "DU",
+    "min": "Min",
+    "max": "Max",
+    "show-my-location": "Mutasd a helyzetemet"
 }

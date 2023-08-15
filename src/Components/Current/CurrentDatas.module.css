@@ -6,8 +6,21 @@
     margin-left: 2.5rem;
 }
 
-@media screen and (max-width: 550px){
+@media screen and (max-width: 600px) {
     .container {
-      gap: 2rem;
+        margin-top: 1rem;
+        column-gap: 7rem;
     }
-  }
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        column-gap: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 410px) {
+    .container {
+        column-gap: .75rem;
+    }
+}

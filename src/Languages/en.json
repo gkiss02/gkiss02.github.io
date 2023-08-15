@@ -60,5 +60,8 @@
     "yes": "Yes",
     "no": "No",
     "am": "AM",
-    "pm": "PM"
+    "pm": "PM",
+    "min": "Min",
+    "max": "Max",
+    "show-my-location": "Show my location"
 }

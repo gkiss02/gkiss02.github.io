@@ -1,12 +1,10 @@
 import styles from './CurrentTemperature.module.css'
 import { SettingsCTX } from '../../Context/Context';
 import { useContext } from 'react';
-import langDecider from '../../HelperFunctions/langDecider';
 
 function CurrentTemperature (props) {
     const settings = useContext(SettingsCTX);
-    const actualJson = langDecider(settings.language);
-    const metric = settings.unit == actualJson.metric;
+    const metric = settings.unit == 'metric';
     const tempUnit = metric ? 'C' : 'F';
 
     return (
