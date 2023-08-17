@@ -12,7 +12,8 @@ export const WeatherDataCTX = createContext({
     isLoading: true,
     noFound: false,
     error: false,
-    goBackHandler: () => {}
+    goBackHandler: () => {},
+    failLocation: false,
 })
 
 export const SettingsCTX = createContext({

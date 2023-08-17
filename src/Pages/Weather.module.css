@@ -27,19 +27,28 @@
     gap: 1rem;
     margin-bottom: 2.5rem;
     overflow-x: scroll;
+    padding: .5rem;
 }
 
 .not-found_container, .error-container {
     display: flex;
+    margin: 0 auto;
     align-items: center;
     flex-direction: column;
     margin-top: 10rem;
     font-size: 2.5rem;
     gap: 1rem;
+    max-width: 70%;
+    text-align: center;
 }
 
 .error-container {
     color:#c51244;
+}
+
+.location-message {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .not-found_button {

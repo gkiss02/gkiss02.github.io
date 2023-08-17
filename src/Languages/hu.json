@@ -63,5 +63,7 @@
     "pm": "DU",
     "min": "Min",
     "max": "Max",
-    "show-my-location": "Mutasd a helyzetemet"
+    "show-my-location": "Mutasd a helyzetemet", 
+    "location-fail": "Nem sikerült meghatározni a helyzetemet",
+    "check-settings": "A ellenőrizd beállításokat, és engedélyezd a helyzeted elérését."
 }

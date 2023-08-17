@@ -7,16 +7,18 @@ function WeatherData(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [noFound, setNoFound] = useState(false)
     const [error, setError] = useState(false)
+    const [failLocation, setFailLocation] = useState(false)
     const settings =  useContext(SettingsCTX);
 
     async function getWeather(link) {
+        setFailLocation(false)
         const res = await fetch(link + '&lang=' + settings.language.toLowerCase())
         if (!res.ok) setError(true);
         const data = await res.json();
         if (!res.ok && data.error.code == 1006) setNoFound(true);
+        if (res.ok) localStorage.setItem('recent', JSON.stringify(data.location.name));
         setWeather(data);
         setIsLoading(false);
-        if (res.ok) localStorage.setItem('recent', JSON.stringify(data.location.name));
     }
 
     useEffect(() => {
@@ -25,12 +27,14 @@ function WeatherData(props) {
     }, [settings])
 
     function getLocation() {
-        setIsLoading(true);
         navigator.geolocation.getCurrentPosition(pos => {
             const long = pos.coords.longitude;
             const lat = pos.coords.latitude;
-            getLocationLink(lat,long)
-        })
+            getLocationLink(lat, long);
+        }, error => {
+            setIsLoading(false);
+            setFailLocation(true);
+        });
     }
 
     function getLocationLink(lat, long) {
@@ -54,7 +58,8 @@ function WeatherData(props) {
         isLoading: isLoading,
         noFound: noFound,
         error: error,
-        goBackHandler: goBackHandler
+        goBackHandler: goBackHandler,
+        failLocation: failLocation
     }
 
     return (

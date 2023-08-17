@@ -8,6 +8,7 @@ import DailyCard from '../Components/Daily/DailyCard';
 import getValidDate from '../HelperFunctions/getValidDate';
 import { WeatherDataCTX, SettingsCTX } from '../Context/Context';
 import langDecider from '../HelperFunctions/langDecider';
+import Search from '../Components/Search/Search'
 
 function Weather() {
     const weather = useContext(WeatherDataCTX);
@@ -47,6 +48,18 @@ function Weather() {
         )
     }
 
+    if (weather.failLocation) {
+        return (
+            <div className={styles['error-container']}>
+                <p>{actualJson['location-fail']}</p>
+                <div className={styles['location-message']}>
+                    <p>{actualJson['check-settings']}</p>
+                </div>
+                <Search></Search>
+            </div>
+        )
+    }
+
     return (
         <div className={styles.container}>
             <Header location={weatherData.location}></Header>
@@ -56,10 +69,10 @@ function Weather() {
                 </div>
                 <div className={styles.line}></div>
                 <div className={styles['current-item']}>
-                <CurrentDatas 
-                    weather={weatherData.forecast.forecastday[0]} 
-                    date={weatherData.location.localtime}>
-                </CurrentDatas>
+                    <CurrentDatas 
+                        weather={weatherData.forecast.forecastday[0]} 
+                        date={weatherData.location.localtime}>
+                    </CurrentDatas>
                 </div>
             </div>
             <p className={styles['section-title']}>{actualJson['todays-weather']}</p>

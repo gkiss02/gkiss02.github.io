@@ -63,5 +63,7 @@
     "pm": "PM",
     "min": "Min",
     "max": "Max",
-    "show-my-location": "Show my location"
+    "show-my-location": "Show my location",
+    "location-fail": "Failed to get your location",
+    "check-settings": "Please check your settings and allow to get your location"
 }
